@@ -1,12 +1,18 @@
 import logo from "../../images/logo.png"
 
-export default function Sign() {
+export default function Sign({ onSubmit }) {
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onSubmit();
+  }
+
   return (
     <section className="sign">
       <div className="sign__container">
         <img src={logo} className="sign__logo"/>
         <h2 className="sign__title">Ваучеры</h2>
-        <form className="sign__form">
+        <form className="sign__form" onSubmit={handleSubmit}>
           <label htmlFor="user-name" className="sign__label">Имя пользователя</label>
           <input
             type="text"
