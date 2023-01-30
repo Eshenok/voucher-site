@@ -22,12 +22,10 @@ function App() {
   }
 
   function handleSelectCustomer(id) {
-    Api.getCustomerOrder(id).then((res) => {
+    Api.getCustomerOrders(id).then((res) => {
       setCustomerOrders(res.orders);
-    })
+    }).catch((err) => {console.log(err)})
   }
-
-  console.log(customers);
   console.log(customerOrders);
 
   return (
@@ -36,7 +34,7 @@ function App() {
         <Sign onSubmit={handleLogIn} />
       </Route>
       <Route path="/vouchers">
-        <Main customersData={customers} onSelectCustomer={handleSelectCustomer}/>
+        <Main customersData={customers} onSelectCustomer={handleSelectCustomer} customerOrders={customerOrders}/>
       </Route>
     </Switch>
   );
