@@ -101,7 +101,6 @@
 	width: 191px;
 	height: 42px;
 	background-color: #0bc0df;
-	background-image: linear-gradient(to bottom,#0bc0df,#0bc0df);
 	position: relative;
 	color: #fff;
 	border: 1px solid #0bc0df;
@@ -117,4 +116,15 @@
 	font-weight: 500;
 	font-style: normal;
 	font-stretch: normal;
+	/* Анимация */
+	transition: background-color linear .2s, border linear .2s;
+}
+
+.button_theme_blue:hover {
+	cursor: pointer;
+	border: 1px solid #1c9daf;
+}
+
+.button_theme_blue:active {
+	background-color: #1c9daf;
 }

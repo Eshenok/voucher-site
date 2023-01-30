@@ -1,16 +1,34 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Switch, useHistory } from "react-router-dom";
 import Sign from "./components/Sign/Sign";
 import Main from "./components/Main/Main";
+import Api from "./components/utils/Api/Api";
 
 function App() {
 
+  const [customers, setCustomers] = useState([]);
+  const [customerOrders, setCustomerOrders] = useState([]);
   const history = useHistory();
+
+  useEffect(() => {
+    Api.getCostumers().then((res) => {
+      setCustomers(res.results);
+    }).catch((err) => {console.log(err)})
+  }, [])
 
   function handleLogIn() {
     history.push('/vouchers');
   }
+
+  function handleSelectCustomer(id) {
+    Api.getCustomerOrder(id).then((res) => {
+      setCustomerOrders(res.orders);
+    })
+  }
+
+  console.log(customers);
+  console.log(customerOrders);
 
   return (
     <Switch>
@@ -18,7 +36,7 @@ function App() {
         <Sign onSubmit={handleLogIn} />
       </Route>
       <Route path="/vouchers">
-        <Main />
+        <Main customersData={customers} onSelectCustomer={handleSelectCustomer}/>
       </Route>
     </Switch>
   );
