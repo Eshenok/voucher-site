@@ -26,7 +26,6 @@ function App() {
       setCustomerOrders(res.orders);
     }).catch((err) => {console.log(err)})
   }
-  console.log(customerOrders);
 
   return (
     <Switch>

@@ -1,0 +1,42 @@
+.vouchers {
+	display: grid;
+	grid-template-columns: 317px 1fr;
+}
+
+.vouchers__form {
+	height: calc(100vh - 47px);
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 0 10px 0 rgba(0,0,0,.15);
+}
+
+.vouchers__customers {
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	width: 100%;
+}
+
+.vouchers__customer {
+	margin: 0;
+	padding: 13px 20px;
+	border-bottom: 1px solid #e1e6ea;
+	background-color: #fafbfb;
+	/*Шрифт*/
+	font-family: Arial, sans-serif;
+	font-size: .8125rem;
+	font-weight: normal;
+	line-height: 1rem;
+	color: #2a2d32;
+	/*Анимация*/
+	transition: background-color linear .2s;
+}
+
+.vouchers__customer:hover {
+	cursor: pointer;
+	background-color: #dff7fd;
+}
+
+.voucher__customer_checked {
+	color: #f36913;
+}

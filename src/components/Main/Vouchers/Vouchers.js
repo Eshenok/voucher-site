@@ -5,33 +5,36 @@ export default function Vouchers({ customersData, onSelectCustomer, customerOrde
 
   const [currentOrder, setCurrentOrder] = useState('');
 
-  function handleSelectCustomer(e) {
-   onSelectCustomer(e.target.value);
-  }
+  const customerClasses = ['vouchers__customer']
 
-  console.log(currentOrder);
+  function handleSelectCustomer(id) {
+   onSelectCustomer(id);
+   customerClasses.push('voucher__customer_checked')
+  }
 
   return (
     <section className="vouchers">
       <form className="vouchers__form">
-        <label htmlFor="voucher_customer">Выберите контрагента</label>
-        <select className="vouchers__select" name="voucher_customer" id="voucher_customer" onChange={handleSelectCustomer}>
+        <input/>
+        <div className="vouchers__customers">
           {
-            customersData.map((customer, index) => <option key={index} value={customer.customer_id}>{customer.customer_name}</option> )
+            customersData.map((customer) =>
+              <h2 onClick={(e) => {handleSelectCustomer(customer.customer_id)}} key={customer.customer_id} className={customerClasses.join(' ')}>{customer.customer_name}</h2>
+            )
           }
-        </select>
-        {
-          customerOrders.length > 0 ?
-            <div className="vouchers__orders">
-              {
-                customerOrders.map((order) =>
-                <Order type="radio" value={order.order_id} key={order.order_id} id={order.order_id} onChange={(e) => {setCurrentOrder(e.target.value)}} description={order.order_name}/>
-                )
-              }
-            </div>
-            : <></>
-        }
+        </div>
       </form>
+      {
+        customerOrders.length > 0 ?
+          <div className="vouchers__orders">
+            {
+              customerOrders.map((order) =>
+                <Order type="radio" value={order.order_id} key={order.order_id} id={order.order_id} onChange={(e) => {setCurrentOrder(e.target.value)}} description={order.order_name}/>
+              )
+            }
+          </div>
+          : <></>
+      }
     </section>
   )
 }
