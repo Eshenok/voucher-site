@@ -15,7 +15,11 @@ export default function Vouchers({ customersData, onSelectCustomer, customerOrde
   return (
     <section className="vouchers">
       <form className="vouchers__form">
-        <input/>
+        <fieldset className="vouchers__filed">
+          <input className="input input_place_vouchers" placeholder="Фильтр по наименованию..."/>
+          <button type={"reset"} className="button button_icon_close button_place_vouchers" />
+        </fieldset>
+
         <div className="vouchers__customers">
           {
             customersData.map((customer) =>
