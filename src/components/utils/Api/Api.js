@@ -28,15 +28,24 @@ class Api {
     }).then(res => this._getResponseData(res));
   }
 
-  pushVouchers() {
-    return fetch('http://10.0.10.234/api/v1/order_item/1/', {
+  getOrderTemplates(id) {
+    return fetch(`${this._baseUrl}/api/v1/voucher_type/${id}`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res => this._getResponseData(res));
+  }
+
+  pushVouchers(id, template, email) {
+    return fetch(`${this._baseUrl}/api/v1/order_item/${id}/`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        "template": "2d59787f-e498-439e-a77b-5f8ec3af7345",
-        "addresses": "a.voloshin@karofilm.ru",
+        "template": template,
+        "addresses": email,
       })
     })
 
