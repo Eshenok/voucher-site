@@ -10,6 +10,6 @@
 ### [localhost:3000/sign-in](http://localhost:3000/sign-in) Страница входа
 > На ней нет авторизации для перехода дальше достаточно нажать кнопку "Войти"
 ### [localhost:3000/vouchers](http://localhost:3000/vouchers) Страница ваучеров
-> Выбранные заказы и шаблоны подсвечиваются #f36913 цветом
+> Выбранные заказы и шаблоны подсвечиваются `#f36913` цветом
 
 ![alt KARO](https://github.com/Eshenok/voucher-site/blob/master/src/images/logo.png?raw=true)
