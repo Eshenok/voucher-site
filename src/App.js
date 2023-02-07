@@ -1,5 +1,11 @@
+/*
+* Где используется React.memo это предотвращение лишнего ререндера компонента
+* в useState хранятся данные о Customers его заказах и шаблонах
+* Временно использую loggedIn как имитацию входа
+*/
+
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Route, Switch, useHistory } from "react-router-dom";
 import Sign from "./components/Sign/Sign";
 import Main from "./components/Main/Main";
@@ -10,23 +16,38 @@ function App() {
   const [customers, setCustomers] = useState([]);
   const [customerOrders, setCustomerOrders] = useState([]);
   const [orderTemplates, setOrderTemplates] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
   const history = useHistory();
 
+  /*
+  * Убираем лишнее обращение.
+  * сработает только если юзер залогинился
+  */
   useEffect(() => {
-    Api.getCostumers().then((res) => {
-      setCustomers(res.results);
-    }).catch((err) => {console.log(err)})
-  }, [])
+    if (loggedIn) {
+      Api.getCostumers().then((res) => {
+        setCustomers(res.results);
+      }).catch((err) => {console.log(err)})
+    }
+  }, [loggedIn])
 
   function handleLogIn() {
+    setLoggedIn(true);
     history.push('/vouchers');
   }
 
-  function handleSelectCustomer(id) {
+  /*
+  * Убираем ререндер ссылки на функцию
+  */
+  const handleSelectCustomer = useCallback((id) => {
     Api.getCustomerOrders(id).then((res) => {
       setCustomerOrders(res.orders);
     }).catch((err) => {console.log(err)})
-  }
+  }, []);
+
+  const clearTemplates = useCallback(() => {
+    setOrderTemplates([]);
+  }, []);
 
   function handleSelectOrder(orderId) {
     Api.getOrderTemplates(orderId).then((res) => {
@@ -37,10 +58,6 @@ function App() {
 
   function pushVocuher(id, template, email) {
     Api.pushVouchers(id, template, email).then((res) => {console.log('ЕБОЙ')}).catch((err) => {console.log(err)})
-  }
-
-  function clearTemplates() {
-    setOrderTemplates([]);
   }
 
   return (
