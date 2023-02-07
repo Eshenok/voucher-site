@@ -134,8 +134,3 @@
 	align-self: end;
 	margin: 0 19px 0 0;
 }
-
-.vouchers__form_type_email {
-	display: flex;
-	flex-direction: column;
-}

@@ -25,8 +25,8 @@ export default function Templates({ orderTemplates, onSubmit, orderId }) {
           />
         )
       }
-      <form className="vouchers__form_type_email templates__form" onSubmit={handleSubmit}>
-        <fieldset className="vouchers__filed templates__filed">
+      <form className="templates__form" onSubmit={handleSubmit}>
+        <fieldset className="templates__filed">
           <input onChange={(e) => {setEmail(e.target.value)}} type="email" className="input input_place_vouchers" placeholder="Введите E-Mail получателя"/>
           <button type={"reset"} className="button button_icon_close button_place_vouchers" onClick={() => {setEmail('')} }/>
         </fieldset>
